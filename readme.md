@@ -21,10 +21,13 @@ directory - blog
  - dashboard/sign-in
 5. create routes with views (3)
 6. create db blog
-7. create migration:
+7. create model and migration:
+	php artisan make:model Post -m
+
 	$table->integer('user_id');
     $table->string('title');
     $table->text('body');
+    
 8. create make auth
 
 
