@@ -23,14 +23,16 @@
       @include('blog.partial.header')
 
       @include('blog.partial.nav')
-
-      @include('blog.partial.jumbotron')
-      
-      @include('blog.partial.featured')
     </div>
+     <main role="main" class="container">
+      <div class="row">
+        @yield('content')
 
-   @yield('content')
+        @include('blog.partial.sidebar')
 
+      </div><!-- /.row -->
+
+    </main><!-- /.container -->
    @include('blog.partial.footer')
 
     <!-- Bootstrap core JavaScript

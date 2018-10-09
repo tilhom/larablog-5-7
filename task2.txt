@@ -1,3 +1,10 @@
+controller:
+$posts = Post::latest()->simplePaginate(3);
+return view('blog.index',compact('posts'));
+
+view:
+@if(count($posts))
+@foreach ($posts as $post)
 <div class="blog-post">
 	<h2 class="blog-post-title">
 		<a href="/posts/{{$post->id}}">{{$post->title}}</a>
@@ -9,3 +16,9 @@
 
 	{!! $post->body !!}
 </div>
+@endforeach
+@else
+<h3>Nothing published yet..</h3>
+@endif
+
+<!-- /.blog-post -->

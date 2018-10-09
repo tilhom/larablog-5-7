@@ -12,4 +12,10 @@ class PostsController extends Controller
     	$posts = Post::latest()->simplePaginate(3);
 		return view('blog.index',compact('posts'));
     }
+
+    public function show($id)
+    {
+        $post = Post::find($id);
+        return view('blog.show', compact('post'));
+    }
 }

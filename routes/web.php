@@ -6,9 +6,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/','PostsController@index');
-Route::view('admin','dashboard.index');
+Route::get('/posts/{id}','PostsController@show');
 Route::view('login','dashboard.sign-in');
 
-// Auth::routes();
+Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::view('/','dashboard.index');
+});
