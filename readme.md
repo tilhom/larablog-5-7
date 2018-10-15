@@ -29,7 +29,8 @@ directory - blog
     $table->text('body');
     
 8. create make auth
-
+nn. fix auth
+nn. create archives by year and month
 
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
