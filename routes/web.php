@@ -8,6 +8,7 @@ Route::get('/', function () {
 Route::get('/','PostsController@index');
 Route::get('/posts/{id}','PostsController@show');
 Route::view('login','dashboard.sign-in');
+Route::post('/posts/{post}/comments','CommentsController@store');
 
 Auth::routes();
 
