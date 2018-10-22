@@ -20,19 +20,6 @@
   @else
   <h3>No comments</h3>
   @endif
-  <hr>
-  <div class="card">
-    <div class="card-block">
-      <form action="/posts/{{$post->id}}/comments" method="POST">
-        @csrf
-        <div class="form-group">
-          <textarea name="comment" id="body" class="form-control" placeholder="Your comment here.."></textarea>
-        </div>
-        <div class="form-group  text-center">
-          <button type="submit" class="btn btn-outline-primary">Add comment</button>
-        </div>
-      </form>
-    </div>
-  </div>
+  @include('blog.partial.commentform')
 </div><!-- /.blog-main -->
 @endsection

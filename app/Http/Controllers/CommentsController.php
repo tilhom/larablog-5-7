@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Mail\Welcome;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,9 @@ class CommentsController extends Controller
 		// 	'comment' => request('comment'),
 		// 	'post_id' => $post->id
 		// ]);
-
-    	$post->addComments(request('comment'));
+         //dd(request('email'));
+    	$comment = $post->addComments(request());
+        \Mail::to(request('email'))->send(new Welcome($post,$comment));
     	// $this->validate(
     	// 	request(), 
     	// 	['body'=>'required|min:2'],
@@ -25,6 +27,7 @@ class CommentsController extends Controller
     	// 	]
     	// );
     	// $post->comments()->create(['body'=>request('body')]);
+        
 		return back();
 	}
 }
