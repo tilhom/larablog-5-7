@@ -42,4 +42,9 @@ class Post extends Model
     {
     	$this->comments()->create(['comment'=>$comment]);
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany(\App\Tag::class);
+    }
 }

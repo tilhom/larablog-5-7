@@ -30,3 +30,6 @@ directory - blog
 8. create make auth
 9. fix auth
 10. create archives by year and month
+11. create comments 
+12. create tags
+

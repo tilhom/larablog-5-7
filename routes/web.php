@@ -7,6 +7,7 @@ Route::get('/', function () {
 });
 Route::get('/','PostsController@index');
 Route::get('/posts/{id}','PostsController@show');
+Route::get('/posts/tags/{tag}','TagsController@index');
 Route::view('login','dashboard.sign-in');
 Route::post('/posts/{post}/comments','CommentsController@store');
 
