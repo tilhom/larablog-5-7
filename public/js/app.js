@@ -47360,22 +47360,60 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      edit: true,
+      edit: false,
       list: [],
       category: {
         id: '',
-        name: ''
+        name: '',
+        status: '',
+        created_at: '',
+        updated_at: ''
       }
     };
   },
   mounted: function mounted() {
     console.log('Category Component Loaded...');
+    this.fetchContactList();
   },
   methods: {
+    fetchContactList: function fetchContactList() {
+      var _this = this;
+
+      console.log('Fetching categories...');
+      axios.get('/api/categories').then(function (response) {
+        console.table(response.data);
+        _this.list = response.data;
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
     createCategory: function createCategory() {
       console.log('Creating category...');
       return;
@@ -47474,7 +47512,56 @@ var render = function() {
           )
         ])
       ]
-    )
+    ),
+    _vm._v(" "),
+    _c("table", { staticClass: "table table-hover" }, [
+      _vm._m(1),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.list, function(category) {
+          return _c("tr", [
+            _c("td", [_vm._v(_vm._s(category.id) + " ")]),
+            _vm._v(" "),
+            _c("td", [_c("strong", [_vm._v(_vm._s(category.name))])]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(category.status) + " ")]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(category.created_at) + " ")]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(category.updated_at) + " ")]),
+            _vm._v(" "),
+            _c("td", [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success btn-xs",
+                  on: {
+                    click: function($event) {
+                      _vm.showCategory(category.id)
+                    }
+                  }
+                },
+                [_vm._v("Edit")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger btn-xs",
+                  on: {
+                    click: function($event) {
+                      _vm.deleteCategory(category.id)
+                    }
+                  }
+                },
+                [_vm._v("Delete")]
+              )
+            ])
+          ])
+        })
+      )
+    ])
   ])
 }
 var staticRenderFns = [
@@ -47490,6 +47577,26 @@ var staticRenderFns = [
       },
       [_c("h1", { staticClass: "h2" }, [_vm._v("Categories")])]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Id")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Status")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Created")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Updated")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Operation")])
+      ])
+    ])
   }
 ]
 render._withStripped = true

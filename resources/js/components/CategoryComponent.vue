@@ -13,6 +13,29 @@
         <button v-show="edit" type="submit" class="btn btn-primary">Update Category</button>
     </div>
     </form>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Created</th>
+                <th>Updated</th>
+                <th>Operation</th>
+            </tr>
+        </thead>
+        <tbody>
+      <tr v-for="category in list">
+        <td>{{category.id}} </td>
+        <td><strong>{{category.name}}</strong></td>
+        <td>{{category.status}} </td>
+        <td>{{category.created_at}} </td>
+        <td>{{category.updated_at}} </td>
+        <td><button @click="showCategory(category.id)" class="btn btn-success btn-xs">Edit</button>
+        <button @click="deleteCategory(category.id)" class="btn btn-danger btn-xs">Delete</button></td>
+      </tr>
+        </tbody>
+    </table>
 </div>
 </template>
 
@@ -20,18 +43,32 @@
   export default {
     data: function(){
       return {
-        edit:true,
+        edit:false,
         list:[],
         category:{
           id:'',
-          name:''
+          name:'',
+          status:'',
+          created_at:'',
+          updated_at:'',
           }
       }
     },
     mounted: function(){
       console.log('Category Component Loaded...');
+      this.fetchContactList();
     },
     methods: {
+        fetchContactList:function(){
+        console.log('Fetching categories...');
+        axios.get('/api/categories')
+          .then((response) => {
+            console.table(response.data);
+            this.list = response.data;
+          }).catch((error) => {
+            console.log(error);
+          });
+      },
           createCategory: function(){
             console.log('Creating category...');
             return;
