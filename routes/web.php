@@ -19,6 +19,7 @@ Route::prefix('admin')->middleware('auth')->namespace('admin')->group(
 	function () {
 
 	Route::view('/','dashboard.index');
-    Route::resource('categories','CategoriesController');
+	Route::view('/categories','dashboard.categories');
+    // Route::resource('categories','CategoriesController');
     
 });
