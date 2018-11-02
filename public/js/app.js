@@ -47400,15 +47400,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   mounted: function mounted() {
     console.log('Category Component Loaded...');
-    this.fetchContactList();
+    this.fetchCategoryList();
   },
   methods: {
-    fetchContactList: function fetchContactList() {
+    fetchCategoryList: function fetchCategoryList() {
       var _this = this;
 
       console.log('Fetching categories...');
       axios.get('/api/categories').then(function (response) {
-        console.table(response.data);
+        console.log(response.data);
         _this.list = response.data;
       }).catch(function (error) {
         console.log(error);
@@ -47416,14 +47416,48 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     createCategory: function createCategory() {
       console.log('Creating category...');
-      return;
+      var self = this;
+      var params = Object.assign({}, self.category);
+      axios.post('/api/categories/store', params).then(function () {
+        self.category.name = '';
+        self.edit = false;
+        self.fetchCategoryList();
+      }).catch(function (error) {
+        console.log(error);
+      });
     },
+    showCategory: function showCategory(id) {
+      var self = this;
+      axios.get('/api/categories/' + id).then(function (response) {
+        self.category.id = response.data.id;
+        self.category.name = response.data.name;
+        self.category.status = response.data.status;
+      });
+      self.edit = true;
+    },
+
     updateCategory: function updateCategory(id) {
       console.log('Updating category ' + id + '...');
-      return;
-    }
-  }
-});
+      var self = this;
+      var params = Object.assign({}, self.category);
+      axios.patch('/api/categories/' + id, params).then(function () {
+        self.category.name = '';
+        self.edit = false;
+        self.fetchCategoryList();
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }, // the end of updateCategory
+    deleteCategory: function deleteCategory(id) {
+      if (!confirm("Are you sure delete that?")) return;
+      var self = this;
+      axios.delete('/api/categories/' + id).then(function (response) {
+        self.fetchCategoryList();
+      }).catch(function (error) {
+        console.log(error);
+      });
+    } // the end of methods
+  } });
 
 /***/ }),
 /* 42 */
@@ -47505,7 +47539,7 @@ var render = function() {
                   expression: "edit"
                 }
               ],
-              staticClass: "btn btn-primary",
+              staticClass: "btn btn-success",
               attrs: { type: "submit" }
             },
             [_vm._v("Update Category")]
